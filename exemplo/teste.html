@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Prototipo 0.1 - UB</title>
+<script src="jquery-3.1.0.min.js"></script>
+<script src="ub.js"></script>
+<style>
+body{
+  background-color: #e3e3e3;
+  margin: 20px;
+}
+.box{
+  position: relative;
+  border: 1px solid #999;
+  margin:2px;
+}
+.box h2{
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  margin-top: 0px;
+  color: #333;
+}
+.box.typeA{
+  background-color: rgba(255, 0, 0, 0.4);
+}
+.box.typeB{
+  background-color: rgba(0, 0, 255, 0.4);;
+}
+.left{
+  float:left;
+}
+.right{
+  float:right;
+}
+.span1{
+  width:100px;
+}
+.span2{
+  width:140px;
+}
+.span3{
+  width:180px;
+}
+.span4{
+  width:220px;
+}
+.span5{
+  width:260px;
+}
+.span6{
+  width:300px;
+}
+.span7{
+  width:400px;
+}
+#tudo{
+  width:1280px;
+  margin:0 auto;
+  position: relative;
+}
+</style>
+</head>
+<body>
+  <button class="send">ENVIA</button>
+  <div id="tudo">
+      <div class="box typeA left span7" style='height:200px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span5" style='height:150px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span1" style='height:200px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span7" style='height:200px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span4" style='height:120px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span6" style='height:90px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span1" style='height:70px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span2" style='height:50px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span7" style='height:60px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span7" style='height:110px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span5" style='height:290px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span2" style='height:190px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span2" style='height:50px;'><h2>Tipo A</h2></div>
+      <div class="box typeB left span4" style='height:250px;'><h2>Tipo B</h2></div>
+      <div class="box typeA left span7" style='height:260px;'><h2>Tipo A</h2></div>
+  </div>
+</body>
+</html>

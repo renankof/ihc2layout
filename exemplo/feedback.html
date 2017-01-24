@@ -1,0 +1,182 @@
+<html>
+<head>
+<title>Prototipo FeedBack</title>
+<meta charset="utf-8">
+<script src="jquery-3.1.0.min.js"></script>
+<style>
+body{
+  background-color: #e3e3e3;
+  margin: 20px;
+}
+#tudo{
+  width:1280px;
+  margin:0 auto;
+  position: relative;
+}
+
+#feedback_box {
+    /*display: none;*/
+    width: 400px;
+    height: 200px;
+    background-color: #f0f0f0;
+    text-align: center;
+    color: #000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -100px;
+    z-index: 1100;
+    border: 1px solid #CCC;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -opera-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+    padding:10px;
+}
+
+#sem_luz {
+    background: none repeat scroll 0% 0% rgba(0,0,0,0.7);
+    /*display: none;*/
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    min-height: 100%;
+    z-index: 1050;
+}
+
+.btn-primary.btn:hover {
+    background: #FBF02C;
+    color: #000;
+}
+.btn-primary {
+    background-color: #0074cc;
+    *background-color: #05c;
+    background-image: -ms-linear-gradient(top,#08c,#05c);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#05c));
+    background-image: -webkit-linear-gradient(top,#08c,#05c);
+    background-image: -o-linear-gradient(top,#08c,#05c);
+    background-image: -moz-linear-gradient(top,#08c,#05c);
+    background-image: linear-gradient(top,#08c,#05c);
+    background-repeat: repeat-x;
+    border-color: #05c #05c #003580;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#0088cc',endColorstr='#0055cc',GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+.btn-large {
+    padding: 9px 14px;
+    font-size: 15px;
+    line-height: normal;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.btn {
+    display: inline-block;
+    *display: inline;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    *margin-left: .3em;
+    font-size: 13px;
+    line-height: 18px;
+    *line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    *background-color: #e6e6e6;
+    background-image: -ms-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(top,#fff,#e6e6e6);
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    *border: 0;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff',endColorstr='#e6e6e6',GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    *zoom: 1;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+</style>
+
+<script>
+$(document).ready(function(){
+    // le cookie
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    var tam = $(window).width();
+	if(tam >= 500){
+		var ex = '$("#sem_luz").css("display","inline");$("#feedback_box").css("display","inline");'
+		var opine = setTimeout(ex ,30*1000);
+	}
+
+	$(document.querySelectorAll(".fechar_opine")).click(function(){
+		$("#sem_luz").css("display","none");
+		$("#feedback_box").css("display","none");
+		clearTimeout(opine);
+	});
+
+    // set user com valor do cookie
+    var user = readCookie('UB-User-Identification');
+
+    $("#feedback_false").click(function(){
+        $.get( "http:/127.0.0.1:5000/getFeedback",
+                          {
+                            feedback: "False",
+                            user: user
+                          });
+        // $("#sem_luz").css("display","none");
+        // $("#feedback_box").css("display","none");
+        clearTimeout(opine);
+    });
+    $("#feedback_true").click(function(){
+        $.get( "http:/127.0.0.1:5000/getFeedback",
+                          {
+                            feedback: "True",
+                            user: user
+                          });
+        // $("#sem_luz").css("display","none");
+        // $("#feedback_box").css("display","none");
+        clearTimeout(opine);
+    });
+});
+</script>
+</head>
+<body>
+    <div id="sem_luz" class="fechar_opine" ></div>
+      <div id="tudo">
+          <div id="feedback_box">
+              <div style="background-color:#cbcbcb; widht:100%;border-radius:5px;padding:3px;">
+                  <p style="color:#505050;font-size: 16px;margin-bottom: .5em;">A apresentação do anúncio foi modificada para melhorar sua experiência!</p>
+                </div>
+              <p style="color:#505050;font-size: 18px;margin-bottom: .5em;">Gostaria de voltar para a apresentação de anúncio anterior?</p>
+              <div style="margin-top:30px;">
+                  <button id="feedback_false">Sim</button> <button id="feedback_true">Não</button>
+              </div>
+              <div class="btn btn-primary btn-large fechar_opine" style="position: absolute; right: -15px; top: -15px" data-original-title="" title="">X</div>
+        </div>
+      </div>
+</body>
+</html>
